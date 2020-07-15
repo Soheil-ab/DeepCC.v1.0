@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Deepcc by Soheil-ab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Deepcc</h1>
+      <h2 class="project-tagline">DeepCC: A Deep Reinforcement Learning Plug-in to Boost the performance of your TCP scheme in Cellular Networks!</h2>
+      <a href="https://github.com/Soheil-ab/DeepCC.v1.0" class="btn">View on GitHub</a>
+      <a href="https://github.com/Soheil-ab/DeepCC.v1.0/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/Soheil-ab/DeepCC.v1.0/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="deepcc-v10" class="anchor" href="#deepcc-v10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>DeepCC v1.0</h1>
+<h1>
+<a id="installation-guide" class="anchor" href="#installation-guide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation Guide</h1>
+<h3>
+<a id="source-code" class="anchor" href="#source-code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Source Code:</h3>
+<pre><code>Get the source code and follow the instructions in deepcc.v1.0/README.md file.
+
+    git clone https://github.com/deep-cc/mobi20.git
+    cd mobi20
+    tar -xzf deepcc.v1.0.tar.gz 
+    cd deepcc.v1.0
+    cat README.md    
+</code></pre>
+<h3>
+<a id="installing-required-tools" class="anchor" href="#installing-required-tools" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installing Required Tools</h3>
+<ol>
+<li>
+<p>Install Mahimahi (<a href="http://mahimahi.mit.edu/#getting">http://mahimahi.mit.edu/#getting</a>)</p>
+<div class="highlight highlight-source-shell"><pre>sudo apt-get install build-essential git debhelper autotools-dev dh-autoreconf iptables protobuf-compiler libprotobuf-dev pkg-config libssl-dev dnsmasq-base ssl-cert libxcb-present-dev libcairo2-dev libpango1.0-dev iproute2 apache2-dev apache2-bin iptables dnsmasq-base gnuplot iproute2 apache2-api-20120211 libwww-perl
+git clone https://github.com/ravinet/mahimahi 
+<span class="pl-c1">cd</span> mahimahi
+./autogen.sh <span class="pl-k">&amp;&amp;</span> ./configure <span class="pl-k">&amp;&amp;</span> make
+sudo make install
+sudo sysctl -w net.ipv4.ip_forward=1</pre></div>
+</li>
+<li>
+<p>Install iperf3</p>
+<div class="highlight highlight-source-shell"><pre>sudo apt-get remove iperf3 libiperf0
+wget https://iperf.fr/download/ubuntu/libiperf0_3.1.3-1_amd64.deb
+wget https://iperf.fr/download/ubuntu/iperf3_3.1.3-1_amd64.deb
+sudo dpkg -i libiperf0_3.1.3-1_amd64.deb iperf3_3.1.3-1_amd64.deb
+rm libiperf0_3.1.3-1_amd64.deb iperf3_3.1.3-1_amd64.deb</pre></div>
+</li>
+<li>
+<p>Install Python, pip, and virtual environment</p>
+</li>
+</ol>
+<p>Source code requires Python 3.4, 3.5, or 3.6. Python 3.x is generally installed by default on Ubuntu.</p>
+<p>Check Python version</p>
+<pre><code>python3 --version
+</code></pre>
+<p>Install pip3 and virtual environment</p>
+<pre><code>sudo apt update
+sudo apt install python3-pip
+sudo pip3 install -U virtualenv
+</code></pre>
+<h3>
+<a id="create-virtual-environment" class="anchor" href="#create-virtual-environment" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create Virtual environment</h3>
+<p>Create a new virtual environment by choosing a Python interpreter and make <code>~/venv</code> directory to hold it:</p>
+<pre><code>sudo mkdir ~/venv
+virtualenv --system-site-packages -p python3 ~/venv
+</code></pre>
+<ol start="4">
+<li>Install Tensorflow (CPU)</li>
+</ol>
+<p>Activate the virtual environment and install Tensorflow</p>
+<pre><code>source ~/venv/bin/activate
+pip install --upgrade pip
+pip install --upgrade tensorflow
+</code></pre>
+<ol start="5">
+<li>Install sysv_ipc 1.0.0</li>
+</ol>
+<pre><code>pip install sysv_ipc
+</code></pre>
+<p>Verify Installation</p>
+<pre><code>python -c "import tensorflow as tf; tf.enable_eager_execution(); print(tf.reduce_sum(tf.random_normal([1000, 1000])))"
+</code></pre>
+<p>To deactivate venv</p>
+<pre><code>(venv) $ deactivate
+</code></pre>
+<h3>
+<a id="patching-deepcc-kernel-install-the-prepared-debian-packages" class="anchor" href="#patching-deepcc-kernel-install-the-prepared-debian-packages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Patching DeepCC Kernel: Install the prepared debian packages.</h3>
+<pre><code>cd linux
+sudo dpkg -i linux-image*
+sudo dpkg -i linux-header*
+sudo reboot 
+</code></pre>
+<h3>
+<a id="verify-the-new-kernel" class="anchor" href="#verify-the-new-kernel" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Verify the new kernel</h3>
+<p>Use the following command to make sure that new kernel is installed:</p>
+<pre><code>uname -r
+</code></pre>
+<p>The output should be 4.13.1-0309. If not you need to bring the 4.13.1-0309 Kernel image on top of the grub list. For instance, you can use grub-customizer application. Install the grub-customizer using following:</p>
+<p>sudo add-apt-repository ppa:danielrichter2007/grub-customizer
+sudo apt-get update
+sudo apt-get install grub-customizer
+sudo grub-customizer</p>
+<h3>
+<a id="build-deepccs-server-client-apps" class="anchor" href="#build-deepccs-server-client-apps" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build DeepCC's Server-Client Apps</h3>
+<p>To build the required applications, run the following:</p>
+<pre><code>./build.sh
+</code></pre>
+<h3>
+<a id="cellular-traces" class="anchor" href="#cellular-traces" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cellular Traces</h3>
+<pre><code>All gathered traces including some from prior work is located at the folder named traces.
+</code></pre>
+<h3>
+<a id="use-the-learned-model" class="anchor" href="#use-the-learned-model" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use the learned model</h3>
+<pre><code>The trained models of TCP Cubic, BBR, Westwood, and Illinois used throughout the paper located in &lt;models&gt; folder.
+
+cd models/
+./setitup.sh
+</code></pre>
+<h3>
+<a id="run-a-sample-test-using-the-learned-model" class="anchor" href="#run-a-sample-test-using-the-learned-model" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Run a Sample Test using the learned model</h3>
+<p>Here, we enable DeepCC for TCP Cubic and run a sample test over TMobile-LTE-driving trace:</p>
+<pre><code>./evaluate.sh 8000 cubic  
+</code></pre>
+<p>Results will be generated automatically in rl-module/log/*
+You can check out the summary of results in rl-module/log/results-deep-cubic*.tr file.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/Soheil-ab/DeepCC.v1.0">Deepcc</a> is maintained by <a href="https://github.com/Soheil-ab">Soheil-ab</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>

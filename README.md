@@ -1,5 +1,7 @@
 # DeepCC v1.0
 
+This release presents the source code and materials used for the experiments in our IEEE JSAC'20 paper: "Wanna Make Your TCP Scheme Great for Cellular Networks? Let Machines Do It for You!" <Early Access: https://ieeexplore.ieee.org/document/9252929>.
+
 Installation Guide
 ==================
 ### Source Code:

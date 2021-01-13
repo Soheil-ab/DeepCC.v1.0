@@ -2,7 +2,7 @@
 
 if [ $# != 11 ]
 then
-    echo -e "usage:$0 latency port trace_id it qsize target initial_alpha period training scheme[ cubic , vegas , west , illi , yeah , veno, scal , htcp , cdg , hybla ,  ] result_prefix"
+    echo -e "usage:$0 latency (one-way delay) port trace_id it qsize target initial_alpha period training scheme[ cubic , vegas , west , illi , yeah , veno, scal , htcp , cdg , hybla ,  ] result_prefix"
     echo "$@"
     echo "$#"
     exit
@@ -14,7 +14,9 @@ sudo killall -s15 python
 #ipcrm -M 12345
 #ipcs -m
 
+#One way delay (do not confuse it with minRTT)
 latency=$1
+
 port=$2
 i=$3;
 it=$4

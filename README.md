@@ -4,6 +4,8 @@ This release presents the source code and materials used for the experiments in 
 
 Installation Guide
 ==================
+Our patched Kernel is based on Kernel 4.13. That means you will need Ubuntu 14.04 or Ubuntu 16.04 to smoothly use our patched Kernel. As a side note, Ubuntu 16.04/14.04 are  based on 4.X Kernels while Ubuntu 18.04/0.04 are based on 5.X ones.
+
 ### Source Code:
     Get the source code and follow the instructions in deepcc.v1.0/README.md file.
 
@@ -64,7 +66,7 @@ virtualenv --system-site-packages -p python3 ~/venv
 
 4. Install Tensorflow (CPU)
 
-Activate the virtual environment and install Tensorflow
+Activate the virtual environment and install Tensorflow (TF version used for this work is 1.14).
 ```
 source ~/venv/bin/activate
 pip install --upgrade pip
@@ -98,7 +100,7 @@ Use the following command to make sure that new kernel is installed:
 
 	uname -r
 
-The output should be 4.13.1-0309. If not you need to bring the 4.13.1-0309 Kernel image on top of the grub list. For instance, you can use grub-customizer application. Install the grub-customizer using following:
+The output should be 4.13.1-0409. If not you need to bring the 4.13.1-0409 Kernel image on top of the grub list. For instance, you can use grub-customizer application. Install the grub-customizer using following:
 
    sudo add-apt-repository ppa:danielrichter2007/grub-customizer
    sudo apt-get update

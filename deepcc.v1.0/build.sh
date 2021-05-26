@@ -3,3 +3,5 @@ g++ src/client.c -o client
 
 mv rl-server client rl-module/
 
+# Make the log directory for the experiments
+mkdir -p rl-module/log

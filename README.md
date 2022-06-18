@@ -6,15 +6,6 @@ Installation Guide
 ==================
 Our patched Kernel is based on Kernel 4.13. That means you will need Ubuntu 14.04 or Ubuntu 16.04 to smoothly use our patched Kernel. As a side note, Ubuntu 16.04/14.04 are  based on 4.X Kernels while Ubuntu 18.04/0.04 are based on 5.X ones.
 
-### Source Code:
-    Get the source code and follow the instructions in deepcc.v1.0/README.md file.
-
-        git clone https://github.com/deep-cc/mobi20.git
-        cd mobi20
-        tar -xzf deepcc.v1.0.tar.gz 
-        cd deepcc.v1.0
-        cat README.md    
-
 ### Installing Required Tools
 
 1. Install Mahimahi (http://mahimahi.mit.edu/#getting)
